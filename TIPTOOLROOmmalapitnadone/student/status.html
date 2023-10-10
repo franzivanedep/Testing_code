@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>TIP - Reservation Status</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet" />
+    <style>
+        .status-label {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container px-5">
+            <a class="navbar-brand" href="#">TIP Tool Room</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="myaccount.html">Home</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container-fluid">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <div class="card mt-4">
+                        <div class="card-body">
+                            <h2 class="card-title">Borrowing Status</h2>
+                            <div class="status-row">
+                                <span class="status-label">Status:</span>
+                                <span id="status" class="status-value"></span>
+                            </div>
+                            <div class="status-row">
+                                
+                                <span id="item-name" class="status-value"></span>
+                            </div>
+                            <div class="status-row">
+                                <span class="status-label">Approval Status:</span>
+                                <span id="approval-status" class="status-value"></span>
+                            </div>
+                            <div class="status-row">
+                                <span class="status-label">Preparation Status:</span>
+                                <span id="preparation-status" class="status-value"></span>
+                            </div>
+                            <div class="status-row">
+                                <span class="status-label">Readiness Status:</span>
+                                <span id="readiness-status" class="status-value"></span>
+                            </div>
+                            <div class="status-row">
+                                <span class="status-label">Student Name:</span>
+                                <span id="student-name" class="status-value"></span>
+                            </div>
+                            <div class="status-row">
+                                <span class="status-label">Course Code:</span>
+                                <span id="course-code" class="status-value"></span>
+                            </div>
+                            <div class="status-row">
+                                <span class="status-label">Item List:</span>
+                                <ul id="item-list" class="status-value"></ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Status data retrieval and update -->
+    <script>
+        // Simulated status data
+const statusData = {
+    status: "Borrowed",
+    approvalStatus: "Approved",
+    preparationStatus: "Preparing",
+    readinessStatus: "Ready for Pick",
+    studentName: "Juan Dela Cruz",
+    courseCode: "CS101",
+    itemList: ["Item 1", "Item 2", "Item 3"],
+};
+
+// Update the status page with the fetched data
+document.getElementById("status").textContent = statusData.status;
+document.getElementById("item-name").textContent = statusData.itemName;
+document.getElementById("approval-status").textContent = statusData.approvalStatus;
+document.getElementById("preparation-status").textContent = statusData.preparationStatus;
+document.getElementById("readiness-status").textContent = statusData.readinessStatus;
+document.getElementById("student-name").textContent = statusData.studentName;
+document.getElementById("course-code").textContent = statusData.courseCode;
+
+// Create the item list elements
+const itemListElement = document.getElementById("item-list");
+statusData.itemList.forEach(item => {
+    const listItem = document.createElement("li");
+    listItem.textContent = item;
+    itemListElement.appendChild(listItem);
+});
+    </script>
+</body>
+
+</html>

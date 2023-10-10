@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TIP - Reservation Homepage</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/imageCSS.css">
+    <style>
+        /* Add custom styles here */
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#!">TIP Tool Room</a>
+        </div>
+    </nav>
+    
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="d-flex align-items-center mb-4">
+                    <div class="img-container mr-3">
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAM1BMVEXk5ueutLeqsbTn6eqpr7PJzc/j5ebf4eLZ3N2wtrnBxsjN0NLGysy6v8HT1tissra8wMNxTKO9AAAFDklEQVR4nO2d3XqDIAxAlfivoO//tEOZWzvbVTEpic252W3PF0gAIcsyRVEURVEURVEURVEURVEURVEURVEURVEURVEURflgAFL/AirAqzXO9R7XNBVcy9TbuMHmxjN6lr92cNVVLKEurVfK/zCORVvW8iUBnC02dj+Wpu0z0Y6QlaN5phcwZqjkOkK5HZyPAjkIjSO4fIdfcOwFKkJlX4zPu7Ha1tIcwR3wWxyFhRG6g4Je0YpSPDJCV8a2Sv2zd1O1x/2WMDZCwljH+clRrHfWCLGK8REMiql//2si5+DKWKcWeAGcFMzzNrXC/0TUwQ2s6+LhlcwjTMlYsUIQzPOCb7YBiyHopyLXIEKPEkI/TgeuiidK/R9FniUDOjRDpvm0RhqjMyyXNjDhCfIMYl1gGjIMIuYsnGEYRMRZOMMunaLVwpWRW008v6fYKDIzxCwVAeNSO90BJW6emelYBRF/kHpYGVaoxTDAaxOFsfP9y8hpJ4xd7gOcij7JNGQ1EYFgkPJa1jQEiYZXRaRINKxSDUW9n+FT82lSKadkiru9/4XPqSLWOekyFgty9SM1sFCMpWmyMBk6SVJMfA1Lia4CTV8+5ouzFQ7NHYo/Qo9ykpxB3X1DJCbRCsAMhzFfHEIRNC9sCU2HFU6NtjEq6CLNcLKLD9pwGCljsCM0HsZZa4NDCJ7W9hWNdiw7zbrtUYwxT1P5eGYjbh7z2b0oyHBgl9oiO2lB6oD4ZAFbVjHLRhPQ44WbC0oNQF0xglr2C48TGuGySePNoE7nKqO22QIxJeuuCeYwZei+wAGq+I41LJlGxE0HygkCUioUChQgSkP1pgg/Q5HKhEcFKEqCAoUiIj0BI/HeUFLa4zSYEztmGxhGBBoa4bGGhAGBoa4bGGhAGBoa4bGGhAGBoa4bGGhAGBoa4bGGhAGBoa4bGGhAGBoa4bGGhAGBoa4bGGhAGBoa4bGGhAGBoa4bGGhAGBoa4bGGhAGBoa4bGGhAGBoa4bGGhAGBoa4bGGhAGBoa4bGGhAGBoa4bGGhAGBoa4bGGhAGBoa4bGGhAGBoa4bGGhAGBoa4bGGhAGBoa4bGGhAGBoa4bGGhAGBoa4bGGhAGBoa4bGGhAGBoa4bGGhAGBoa4bGGhAGBoa4bGGhAGBoa4bGGhAGBoa4bGGhAGBoa4bGGhAGBoa4bGGhAGBoa4bGGhAGBoa4bGGhAGBoa4bGGhAGBoa4bGGhAGBoa4bGGhAGBoa4bGGhAGBgb/8AIfnU56PX6Rt6gAAAABJRU5ErkJggg==">
+                    </div>
+                    <h1 class="display-4">Welcome to TIP Tool Room</h1>
+                </div>
+                <p class="lead">Please make a reservation by filling out the form below.</p>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Reservation Form</h5>
+                        <form>
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" class="form-control" id="name" placeholder="Enter your name">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                            </div>
+                            <div class="form-group">
+                                <label for="date">Date</label>
+                                <input type="date" class="form-control" id="date">
+                            </div>
+                            <div class="form-group">
+                                <label for="time">Time</label>
+                                <input type="time" class="form-control" id="time">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

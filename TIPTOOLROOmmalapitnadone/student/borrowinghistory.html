@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transaction List</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    /* Additional CSS styles */
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f7f7f7;
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 0;
+      padding-top: 20px;
+    }
+
+    button {
+      padding: 8px 16px;
+      background-color: #ddff00;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #ddff00;
+    }
+
+    #itemSection {
+      margin-top: 20px;
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+
+    #itemSection h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+
+    #itemList {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    #itemList li {
+      margin-bottom: 5px;
+    }
+  </style>
+  <script>
+    function showBorrowedItems(studentId, date) {
+      // You can add your logic here to retrieve the items borrowed by the student on the given date
+      // For simplicity, let's assume the items are stored in an array
+      var borrowedItems = [
+        { name: "Item 1", code: "ITM001" },
+        { name: "Item 2", code: "ITM002" },
+        { name: "Item 3", code: "ITM003" }
+      ];
+
+      var itemList = document.getElementById("itemList");
+      itemList.innerHTML = ""; // Clear the previous item list
+
+      // Create list items for each borrowed item and append them to the item list
+      borrowedItems.forEach(function(item) {
+        var listItem = document.createElement("li");
+        listItem.textContent = item.name + " - " + item.code;
+        itemList.appendChild(listItem);
+      });
+
+      // Show the item list section
+      document.getElementById("itemSection").style.display = "block";
+    }
+  </script>
+</head>
+<body>
+  <h2>Transaction List</h2>
+  <table>
+    <tr>
+      <th>Student Name</th>
+      <th>Student ID</th>
+      <th>Course Code</th>
+      <th>Date</th>
+      <th>Time</th>
+      <th>Campus Name</th>
+      <th></th>
+    </tr>
+    <tr>
+      <td>John Doe</td>
+      <td>123456789</td>
+      <td>CSCI101</td>
+      <td>2023-05-30</td>
+      <td>09:00 AM</td>
+      <td>TIP Arlegui</td>
+      <td><button onclick="showBorrowedItems('123456789', '2023-05-30')">View Items</button></td>
+    </tr>
+    <tr>
+      <td>Jane Smith</td>
+      <td>987654321</td>
+      <td>MATH201</td>
+      <td>2023-05-30</td>
+      <td>10:30 AM</td>
+      <td>TIP Arlegui</td>
+      <td><button onclick="showBorrowedItems('987654321', '2023-05-30')">View Items</button></td>
+    </tr>
+    <!-- Add more rows for additional transactions -->
+  </table>
+
+  <!-- Item List Section -->
+  <div id="itemSection" style="display: none;">
+    <h3>Items Borrowed</h3>
+    <ul id="itemList"></ul>
+
+  </div>
+</body>
+</html>

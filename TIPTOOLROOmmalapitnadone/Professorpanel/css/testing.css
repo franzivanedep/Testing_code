@@ -1,0 +1,172 @@
+/* testing.css */
+
+/* Global styles */
+body {
+    font-family: Arial, sans-serif;
+  }
+  
+  .container-fluid {
+    padding: 0;
+  }
+  
+  /* Navbar styles */
+  .navbar {
+    padding: 1rem 0;
+  }
+  
+  .navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  /* Main container styles */
+  .container {
+    padding-top: 2rem;
+  }
+  
+  /* Profile block styles */
+  .container_2 {
+    display: flex;
+    align-items: center;
+    background-color: rgb(31, 31, 31);
+    padding: 1rem;
+  }
+  
+  .img_container_profile {
+    margin-right: 1rem;
+  }
+  
+  .img_profile {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .info_container {
+    color: white;
+    font-size: 1.1rem;
+  }
+  
+  .info_name {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  /* Menu container styles */
+  .menu_container {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .button-container {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  /* Borrowing history and status container styles */
+  .container_3 {
+    margin-top: 3rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+  
+  .block1 {
+    background-color: rgb(231, 231, 231);
+    padding: 1rem;
+    border-radius: 10px;
+  }
+  
+  .borrow_history,
+  .borrow_status {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  .data-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .history_data_wrapper,
+  .history_data_status_wrapper {
+    margin-bottom: 0.5rem;
+  }
+  
+  .history_data,
+  .history_data_status {
+    background-color: rgb(255, 255, 255);
+    padding: 0.5rem;
+    border-radius: 5px;
+  }
+  
+  /* Borrow button styles */
+  .borrow-button {
+    background-color: rgb(52, 152, 219);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    cursor: pointer;
+  }
+  
+  /* Logout button styles */
+  .logout-button {
+    background-color: rgb(231, 76, 60);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    cursor: pointer;
+  }
+  
+  /* Notification button styles */
+  .Notif-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+  
+  .bell_icon {
+    width: 25px;
+    height: 25px;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .container_2 {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .img_container_profile {
+      margin-right: 0;
+      margin-bottom: 1rem;
+    }
+  
+    .info_container {
+      text-align: center;
+    }
+  
+    .menu_container {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .button-container {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  
+    .container_3 {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+  }
+  

@@ -1,0 +1,118 @@
+.toolbox_logo {
+ height: 20px;
+ width: 20px;
+ margin-bottom: 4px;
+ margin-right: 2px;
+}
+
+.toolbox_logo:hover{
+    filter: invert(100%);
+}
+
+
+.TIP_LOGIN_LOGO {
+ height: 100px;
+ width: 100px;
+ margin-bottom: 4px;
+ margin-right: 2px;
+}
+
+.Borrowed_items {
+    margin-left: 100px;
+}
+
+.borrow-button {
+    background-color: #f2ff00;
+    border: none;
+    color: rgb(30, 8, 8);
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-weight: bold;
+    font-size: medium;
+    cursor: pointer;
+    border-radius: 8px;
+    right: 10px;
+
+    height: 30px;
+    width: 90px;
+  }
+  
+  .borrow-button:hover {
+    background-color: #383707;
+    color: white;
+
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  }
+  
+
+
+  
+  
+  .logout-button {
+    background-color: #f2ff00;
+    border: none;
+    color: rgb(30, 8, 8);
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-weight: bold;
+    font-size: medium;
+    cursor: pointer;
+    border-radius: 8px;
+    right: 10px;
+
+    height: 30px;
+    width: 90px;
+  }
+
+  .logout-button:hover {
+    background-color: #383707;
+    color: white;
+
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  }
+  
+
+  .Notif-button {
+    background-color: #f2ff00;
+    border: none;
+    color: rgb(30, 8, 8);
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-weight: bold;
+    font-size: medium;
+    cursor: pointer;
+    border-radius: 8px;
+    right: 10px;
+
+    height: 30px;
+    width: 40px;
+  }
+
+  .Notif-button:hover {
+    background-color: #383707;
+    color: white;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  }
+
+  .bell_icon:hover {
+    filter: invert(100%);
+  }
+
+
+
+  .move-right {
+    position: relative;
+    margin-right: 100px;
+  }
+    
+    
+  .button-container {
+    margin-top: 10px;
+    display: flex; 
+    justify-content: flex-end;
+
+    gap: 15px;
+  }

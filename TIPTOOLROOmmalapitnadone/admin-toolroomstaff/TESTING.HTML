@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ecommerce Admin Panel</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      display: flex;
+      height: 100vh;
+    }
+
+    .sidebar {
+      background-color: #222;
+      color: #fff;
+      padding: 20px;
+      width: 250px;
+      height: 100vh;
+      position: fixed;
+      z-index: 1;
+      overflow-y: auto;
+      transition: width 0.3s ease;
+    }
+
+    .sidebar:hover {
+      width: 300px;
+    }
+
+    .sidebar h2 {
+      color: #fff;
+      font-size: 24px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+
+    .sidebar p {
+      color: #ccc;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .sidebar ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .sidebar li {
+      margin-bottom: 10px;
+    }
+
+    .sidebar a {
+      color: #fff;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      transition: color 0.3s ease;
+      padding: 10px 15px;
+      border-radius: 5px;
+    }
+
+    .sidebar a i {
+      margin-right: 10px;
+    }
+
+    .sidebar a:hover {
+      color: #fff;
+      background-color: #555;
+    }
+
+    .content {
+      flex-grow: 1;
+      padding: 20px;
+      margin-left: 250px;
+    }
+
+    .content header {
+      margin-bottom: 20px;
+    }
+
+    .content h1 {
+      font-size: 32px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .main-content {
+      background-color: #f0f0f0;
+      padding: 20px;
+      border-radius: 5px;
+    }
+
+    .main-content h2 {
+      font-size: 24px;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .main-content p {
+      color: #666;
+      line-height: 1.6;
+    }
+
+    /* Media Queries for Responsive Design */
+    @media screen and (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: static;
+        margin-bottom: 20px;
+        overflow-y: visible;
+      }
+
+      .content {
+        margin-left: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="sidebar">
+      <h2>Tip Toom Room</h2>
+      <ul>
+        <li><a href="#"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+        <li><a href="#"><i class="fas fa-toolbox"></i> Items</a></li>
+        <li><a href="#"><i class="fas fa-clipboard-list"></i> Orders</a></li>
+        <li><a href="#"><i class="fas fa-users"></i> Students</a></li>
+        <li><a href="#"><i class="fas fa-chart-bar"></i> Reports</a></li>
+      </ul>
+    </div>
+    <div class="content">
+      <header>
+        <h1>Welcome to the Admin Panel</h1>
+      </header>
+      <div class="main-content">
+        <h2>Dashboard</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer quis dolor vitae sapien condimentum ultrices.</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
