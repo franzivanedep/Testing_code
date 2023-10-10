@@ -18,6 +18,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </head>
+
 <body>
     <div class="container-fluid">
 
@@ -36,9 +37,9 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="#!">All Items</a></li>
                             <li><hr class="dropdown-divider" /></li>
-                            <li><a class="dropdown-item" href="computer.html">Computer Equipments</a></li>
-                            <li><a class="dropdown-item" href="circuits.html">Electrical Equipments</a></li>
-                            <li><a class="dropdown-item" href="handtools.html">Hand Tools</a></li>
+                            <li><a class="dropdown-item" href="computer.php">Computer Equipments</a></li>
+                            <li><a class="dropdown-item" href="circuits.php">Electrical Equipments</a></li>
+                            <li><a class="dropdown-item" href="handtools.php">Hand Tools</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -59,199 +60,47 @@
     
         </div>
     </header>
-    <section class="py-5">
-        <div class="container px-4 px-lg-5 mt-5">
-            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Product image-->
-                        <img class="card-img-top" src="https://via.placeholder.com/300" alt="..." />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">Item 1</h5>
-                                <!-- Product actions-->
-                                <button class="btn btn-outline-dark add-to-cart" data-item-id="1">Add to Toolbox</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Product image-->
-                        <img class="card-img-top" src="https://via.placeholder.com/300" alt="..." />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">Resistor</h5>
-                                <!-- Product actions-->
-                                <button class="btn btn-outline-dark add-to-cart" data-item-id="2">Add to Toolbox</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Product image-->
-                        <img class="card-img-top" src="https://via.placeholder.com/300" alt="..." />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">Item 2</h5>
-                                <!-- Product actions-->
-                                <button class="btn btn-outline-dark add-to-cart" data-item-id="3">Add to Toolbox</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Product image-->
-                        <img class="card-img-top" src="https://via.placeholder.com/300" alt="..." />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">Item 2</h5>
-                                <!-- Product actions-->
-                                <button class="btn btn-outline-dark add-to-cart" data-item-id="4">Add to Toolbox</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Product image-->
-                        <img class="card-img-top" src="https://via.placeholder.com/300" alt="..." />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">Item 2</h5>
-                                <!-- Product actions-->
-                                <button class="btn btn-outline-dark add-to-cart" data-item-id="4">Add to Toolbox</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Product image-->
-                        <img class="card-img-top" src="https://via.placeholder.com/300" alt="..." />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">Item 2</h5>
-                                <!-- Product actions-->
-                                <button class="btn btn-outline-dark add-to-cart" data-item-id="4">Add to Toolbox</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Product image-->
-                        <img class="card-img-top" src="https://via.placeholder.com/300" alt="..." />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">Item 2</h5>
-                                <!-- Product actions-->
-                                <button class="btn btn-outline-dark add-to-cart" data-item-id="4">Add to Toolbox</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Product image-->
-                        <img class="card-img-top" src="https://via.placeholder.com/300" alt="..." />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">Item 2</h5>
-                                <!-- Product actions-->
-                                <button class="btn btn-outline-dark add-to-cart" data-item-id="4">Add to Toolbox</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Product image-->
-                        <img class="card-img-top" src="https://via.placeholder.com/300" alt="..." />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">Item 2</h5>
-                                <!-- Product actions-->
-                                <button class="btn btn-outline-dark add-to-cart" data-item-id="4">Add to Toolbox</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Product image-->
-                        <img class="card-img-top" src="https://via.placeholder.com/300" alt="..." />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">Item 2</h5>
-                                <!-- Product actions-->
-                                <button class="btn btn-outline-dark add-to-cart" data-item-id="4">Add to Toolbox</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Product image-->
-                        <img class="card-img-top" src="https://via.placeholder.com/300" alt="..." />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">Item 2</h5>
-                                <!-- Product actions-->
-                                <button class="btn btn-outline-dark add-to-cart" data-item-id="4">Add to Toolbox</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Product image-->
-                        <img class="card-img-top" src="https://via.placeholder.com/300" alt="..." />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">Item 2</h5>
-                                <!-- Product actions-->
-                                <button class="btn btn-outline-dark add-to-cart" data-item-id="4">Add to Toolbox</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
+    <?php
+$servername = "localhost:3307";
+$username = "root";
+$db_password = "your_password"; // Replace with your actual MySQL password
+$dbname = "item_db";
 
+// Create a database connection
+$conn = new mysqli($servername, $username, $db_password, $dbname);
 
+// Check the connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 
+// Fetch items from the database for the "Electrical Equipments" category
+$categoryToDisplay = "Electrical Equipments"; // Set the category to display
+$sql = "SELECT * FROM items WHERE category = '$categoryToDisplay'";
+$result = $conn->query($sql);
 
+// Check if items were found
+if ($result->num_rows > 0) {
+    echo "<div class='row row-cols-1 row-cols-md-2 row-cols-lg-3 justify-content-center'>"; // Use Bootstrap grid classes
+    while ($row = $result->fetch_assoc()) {
+        // Render each item with the appropriate CSS class
+        echo "<div class='col mb-4'>";
+        echo "<div class='card h-100'>";
+        echo "<img class='card-img-top product-image' src='https://via.placeholder.com/300' alt='Product Image' />";
+        echo "<div class='card-body p-3'>";
+        echo "<h5 class='card-title fw-bolder'>" . $row["name"] . "</h5>";
+        echo "<button class='btn btn-outline-dark add-to-cart' data-item-id='" . $row["id_num"] . "'>Add to Toolbox</button>";
+        echo "</div></div></div>";
+    }
+    echo "</div>"; // Close the row
+} else {
+    echo "<p>No items found in the 'Electrical Equipments' category.</p>";
+}
 
+// Close the database connection
+$conn->close();
+?>
 
-
-            </div>
-        
         </div>
     </section>
 

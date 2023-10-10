@@ -37,9 +37,9 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="#!">All Items</a></li>
                             <li><hr class="dropdown-divider" /></li>
-                            <li><a class="dropdown-item" href="computer.html">Computer Equipments</a></li>
-                            <li><a class="dropdown-item" href="circuits.html">Electrical Equipments</a></li>
-                            <li><a class="dropdown-item" href="handtools.html">Hand Tools</a></li>
+                            <li><a class="dropdown-item" href="computer.php">Computer Equipments</a></li>
+                            <li><a class="dropdown-item" href="circuits.php">Electrical Equipments</a></li>
+                            <li><a class="dropdown-item" href="handtools.php">Hand Tools</a></li>
                         </ul>
                     </li>
                 </ul>
