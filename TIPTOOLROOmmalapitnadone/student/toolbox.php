@@ -84,13 +84,40 @@
                                     <h3>Summary</h3>
 			 					<!-- Replace the summary section with two drop-down menus -->
 			 					<div class="form-group">
-			 						<label for="Professors">Professors:</label>
-			 						<select class="form-control" id="Professors">
-			 							<option value="faculty">Cardo Dalisay</option>
-			 							<option value="faculty">Victor Magtangol</option>
-										<option value="faculty">Angeline Parrot</option>
-			 						</select>
-			 					</div>
+                                    <label for="Professors">Professors:</label>
+                                    <select class="form-control" id="Professors">
+                                        <?php
+                            $servername = "localhost:3307";
+                            $username = "root";
+                            $db_password = "your_password"; // Replace with your actual MySQL password
+                             $dbname = "professor_db";
+
+// Create a database connection
+$conn = new mysqli($servername, $username, $db_password, $dbname);
+
+// Check the connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$sql = "SELECT first_name, last_name FROM professors";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    // Output data of each row
+    while($row = $result->fetch_assoc()) {
+        $fullName = $row["first_name"]. " " . $row["last_name"];
+        echo '<option value="faculty">' . $fullName . '</option>';
+    }
+} else {
+    echo "No professors found";
+}
+$conn->close();
+
+                                        ?>
+                                    </select>
+                                </div>
+                                
 			 					<div class="form-group">
 			 						<label for="discount">Course Code:</label>
 			 						<select class="form-control" id="discount">
