@@ -1,12 +1,6 @@
 <?php
 session_start();
 
-// Check if the user is already logged in (session is active)
-if (isset($_SESSION['StudentID'])) {
-    header("Location:/TIPTOOLROOmmalapitnadone\student\myaccount.php"); // Redirect to the user's account page
-    exit();
-}
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
     $studentID = $_POST['id_num']; // Student ID
@@ -31,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Prepare and execute the SQL query
-        $sql = "SELECT id_num, password FROM student WHERE email = ?";
+        $sql = "SELECT id_num, password, first_name, last_name, program FROM student WHERE email = ?";
         $stmt = $conn->prepare($sql);
 
         // Check if the query was prepared successfully
@@ -49,8 +43,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     // Verify the entered password against the hashed password
                     if (password_verify($enteredPassword, $hashedPassword)) {
-                        $_SESSION['StudentID'] = $row['id_num']; // Store student ID in the session
-                        echo json_encode(array("success" => true)); // Send success response
+                        // Store user's details in the session
+                        $_SESSION['studentID'] = $row['id_num'];
+                        $_SESSION['name'] = $row['first_name'] . ' ' . $row['last_name'];
+                        $_SESSION['program'] = $row['program'];
+                        $_SESSION['email'] = $email;
+                    
+                        // Redirect to myaccount.php
+                        header("Location: \TIPTOOLROOmmalapitnadone\student\myaccount.php");
                         exit();
                     } else {
                         // Invalid password; send an error response
@@ -78,17 +78,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Invalid email address; send an error response
         echo json_encode(array("success" => false, "message" => "Invalid email address. Please use a valid TIP Gmail address."));
     }
-
-    // Debugging: Print entered and hashed passwords
-    echo "Entered Password: " . $enteredPassword . "<br>";
-    echo "Hashed Password from Database: " . $hashedPassword . "<br>";
-    
-    // Verify the entered password against the hashed password
-    if (password_verify($enteredPassword, $hashedPassword)) {
-        // Password is correct; you can add further actions here
-    } else {
-        echo "Entered Password: " . $enteredPassword . "<br>";
-        echo "Hashed Password from Database: " . $hashedPassword . "<br>";
-    }
 }
+
 ?>

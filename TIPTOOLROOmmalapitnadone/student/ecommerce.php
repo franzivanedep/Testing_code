@@ -45,7 +45,7 @@
                 </ul>
 
                 <!-- ========================= Checkout ========================= -->
-<form class="d-flex" action="toolbox.html" method="get">
+<form class="d-flex" action="toolbox.php" method="get">
     <button class="btn btn-outline-dark" type="submit">
         <img src="images/toolbox-solid.svg" class="toolbox_logo" alt="" srcset="">
         Tool Box
