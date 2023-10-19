@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        form {
+            margin-bottom: 2em;
+        }
+        label {
+            display: block;
+            margin-top: 1em;
+        }
+        input {
+            margin-top: 0.5em;
+            padding: 0.5em;
+            font-size: 1em;
+            width: 20em;
+        }
+        button {
+            margin-top: 1em;
+            padding: 0.5em 1em;
+            font-size: 1em;
+            color: white;
+            background-color: #007BFF;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        ul li {
+            margin-bottom: 0.5em;
+            padding: 1em;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+    <h2>Enter the Courses You Handle</h2>
+    <form class="signin-form" action="PHP/courses.php" method="post">
+        <div class="form-group mb-3">
+            <label class="label" for="Course_Section">Course</label>
+            <input type="text" id="Course_Section" name="Course_Section" class="form-control" placeholder="Course Code" required>
+        </div>
+        <div class="form-group mb-3">
+            <label class="label" for="Course_Code">Section</label>
+            <input type="text" id="Course_Code" name="Course_Code" class="form-control" placeholder="Section" required>
+        </div>
+        <div class="form-group mb-3">
+            <label class="label" for="ProfID">Faculty ID</label>
+            <input type="text" id="ProfID" name="ProfID" class="form-control" placeholder="Section" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Course</button>
+    </form>
+
+   
+</body>
+</html>

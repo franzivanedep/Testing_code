@@ -62,7 +62,7 @@
     <?php
 $servername = "localhost:3307";
 $username = "root";
-$db_password = "your_password"; // Replace with your actual MySQL password
+$db_password = ""; // Replace with your actual MySQL password
 $dbname = "item_db";
 
 // Create a database connection

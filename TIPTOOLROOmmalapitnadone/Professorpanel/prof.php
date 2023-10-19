@@ -373,7 +373,11 @@ body {
     // Event handler for logging out
     function logout() {
       alert("Logged out.");
+
+      window.location.href = '/TIPTOOLROOmmalapitnadone/student/loginprof.html';
+
     }
+    document.getElementById("logoutBtn").addEventListener("click", logout);
 
     // Fetch data and populate the HTML once the DOM is loaded
     document.addEventListener("DOMContentLoaded", fetchData);

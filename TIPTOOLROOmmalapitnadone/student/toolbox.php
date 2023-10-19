@@ -84,48 +84,90 @@
                                     <h3>Summary</h3>
 			 					<!-- Replace the summary section with two drop-down menus -->
 			 					<div class="form-group">
-                                    <label for="Professors">Professors:</label>
-                                    <select class="form-control" id="Professors">
-                                        <?php
-                            $servername = "localhost:3307";
-                            $username = "root";
-                            $db_password = "your_password"; // Replace with your actual MySQL password
-                             $dbname = "professor_db";
+    <label for="Professors">Professors:</label>
+    <select class="form-control" id="professors">
+        <?php
+        $servername = "localhost:3307";
+        $username = "root";
+        $db_password = ""; // Replace with your actual MySQL password
+        $dbname = "professor_db";
 
-// Create a database connection
-$conn = new mysqli($servername, $username, $db_password, $dbname);
+        $conn = new mysqli($servername, $username, $db_password, $dbname);
 
-// Check the connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
 
-$sql = "SELECT first_name, last_name FROM professors";
-$result = $conn->query($sql);
+        $sql = "SELECT id_num, first_name, last_name FROM professors";
+        $result = $conn->query($sql);
 
-if ($result->num_rows > 0) {
-    // Output data of each row
-    while($row = $result->fetch_assoc()) {
-        $fullName = $row["first_name"]. " " . $row["last_name"];
-        echo '<option value="faculty">' . $fullName . '</option>';
-    }
-} else {
-    echo "No professors found";
-}
-$conn->close();
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                $id_num = $row["id_num"];
+                $fullName = $row["first_name"]. " " . $row["last_name"];
+                echo '<option value="' . $id_num . '">' . $fullName . '</option>';
+            }
+        } else {
+            echo "No professors found";
+        }
+        $conn->close();
+        ?>
+    </select>
+</div>
+<div class="form-group">
+    <label for="courses">Courses:</label>
+    <select class="form-control" id="courses">
+        <!-- Options will be populated dynamically with JavaScript -->
+    </select>
+</div>
 
-                                        ?>
-                                    </select>
-                                </div>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const professorsDropdown = document.getElementById("professors");
+    const coursesDropdown = document.getElementById("courses");
+
+    professorsDropdown.addEventListener("change", function() {
+        const selectedProfessor = professorsDropdown.value;
+
+        if (selectedProfessor) {
+            // Make an AJAX request to fetch courses based on the selected professor
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "PHP/acourses.php", true);
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    const response = JSON.parse(xhr.responseText);
+
+                    // Clear existing options
+                    coursesDropdown.innerHTML = '';
+
+                    if (response.length > 0) {
+                        response.forEach(function(course) {
+                            const option = document.createElement("option");
+                            option.value = course.CID;
+                            option.text = course.Course_Code;
+                            coursesDropdown.appendChild(option);
+                        });
+                    } else {
+                        const option = document.createElement("option");
+                        option.text = "No courses found";
+                        coursesDropdown.appendChild(option);
+                    }
+                }
+            };
+
+            xhr.send("professor=" + selectedProfessor);
+        } else {
+            coursesDropdown.innerHTML = '<option value="">Select a professor first</option>';
+        }
+    });
+});
+</script>
+
+
                                 
-			 					<div class="form-group">
-			 						<label for="discount">Course Code:</label>
-			 						<select class="form-control" id="discount">
-			 							<option value="0">CPE 204 CPE22S3</option>
-										 <option value="0">CPE 205 - logic circuits</option>
-			 							<!-- Add more options if needed -->
-			 						</select>
-			 					</div><br>
+			 					
                                  <a class="btn btn-primary" id="checkoutBtn" href="authentication.html">Checkout</a>
 
                                 </div>
