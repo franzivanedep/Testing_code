@@ -3,7 +3,7 @@ session_start();
 
 // Check if the user is already logged in (session is active)
 if (isset($_SESSION['facultyID'])) {
-    header("Location: /TIPTOOLROOmmalapitnadone/Professorpanel/prof.php"); // Redirect to the user's account page
+    header("Location: /TIPTOOLROOmmalapitnadone/Professorpanel/prof.html"); // Redirect to the user's account page
     exit();
 }
 
@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     // Verify the entered password against the hashed password
                     if (password_verify($enteredPassword, $hashedPassword)) {
                         $_SESSION['facultyID'] = $row['id_num']; // Store faculty ID in the session
-                        header("Location: /TIPTOOLROOmmalapitnadone/Professorpanel/prof.php"); // Redirect to the user's account page
+                        header("Location: /TIPTOOLROOmmalapitnadone/Professorpanel/prof.html"); // Redirect to the user's account page
                         exit();
                     } else {
                         // Invalid password; show a pop-up error message and redirect back

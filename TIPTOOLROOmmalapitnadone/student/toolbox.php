@@ -85,48 +85,53 @@
 			 					<!-- Replace the summary section with two drop-down menus -->
 			 					<div class="form-group">
     <label for="Professors">Professors:</label>
-    <select class="form-control" id="professors">
-        <?php
-        $servername = "localhost:3307";
-        $username = "root";
-        $db_password = ""; // Replace with your actual MySQL password
-        $dbname = "professor_db";
+            <select class="form-control" id="professors">
+                <?php
+                $servername = "localhost:3307";
+                $username = "root";
+                $db_password = ""; // Replace with your actual MySQL password
+                $dbname = "professor_db";
 
-        $conn = new mysqli($servername, $username, $db_password, $dbname);
+                $conn = new mysqli($servername, $username, $db_password, $dbname);
 
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
+                if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                }
 
-        $sql = "SELECT id_num, first_name, last_name FROM professors";
-        $result = $conn->query($sql);
+                $sql = "SELECT id_num, first_name, last_name FROM professors";
+                $result = $conn->query($sql);
 
-        if ($result->num_rows > 0) {
-            while($row = $result->fetch_assoc()) {
-                $id_num = $row["id_num"];
-                $fullName = $row["first_name"]. " " . $row["last_name"];
-                echo '<option value="' . $id_num . '">' . $fullName . '</option>';
-            }
-        } else {
-            echo "No professors found";
-        }
-        $conn->close();
-        ?>
-    </select>
-</div>
-<div class="form-group">
-    <label for="courses">Courses:</label>
-    <select class="form-control" id="courses">
-        <!-- Options will be populated dynamically with JavaScript -->
-    </select>
-</div>
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        $id_num = $row["id_num"];
+                        $fullName = $row["first_name"] . " " . $row["last_name"];
+                        echo '<option value="' . $id_num . '">' . $fullName . '</option>';
+                    }
+                } else {
+                    echo "No professors found";
+                }
+                $conn->close();
+                ?>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="courses">Courses:</label>
+            <select class="form-control" id="courses">
+                <!-- Options will be populated dynamically with JavaScript -->
+            </select>
+        </div>
 
-<script>
-document.addEventListener("DOMContentLoaded", function() {
+        <script>
+                let selectedCourseCode = ''; // Default values
+                    let selectedCourseSection = ''; // Default values
+
+
+           document.addEventListener("DOMContentLoaded", function () {
     const professorsDropdown = document.getElementById("professors");
     const coursesDropdown = document.getElementById("courses");
+    
 
-    professorsDropdown.addEventListener("change", function() {
+    professorsDropdown.addEventListener("change", function () {
         const selectedProfessor = professorsDropdown.value;
 
         if (selectedProfessor) {
@@ -135,7 +140,7 @@ document.addEventListener("DOMContentLoaded", function() {
             xhr.open("POST", "PHP/acourses.php", true);
             xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-            xhr.onreadystatechange = function() {
+            xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     const response = JSON.parse(xhr.responseText);
 
@@ -143,12 +148,16 @@ document.addEventListener("DOMContentLoaded", function() {
                     coursesDropdown.innerHTML = '';
 
                     if (response.length > 0) {
-                        response.forEach(function(course) {
-                            const option = document.createElement("option");
-                            option.value = course.CID;
-                            option.text = course.Course_Code;
-                            coursesDropdown.appendChild(option);
-                        });
+                        response.forEach(function (course) {
+    const option = document.createElement("option");
+    option.value = course.CID;
+    option.text = course.Course_Code + ' ' + course.Course_Section;
+    option.dataset.courseCode = course.Course_Code; // Make sure this is correctly set
+    option.dataset.courseSection = course.Course_Section; // Make sure this is correctly set
+    coursesDropdown.appendChild(option);
+});
+
+
                     } else {
                         const option = document.createElement("option");
                         option.text = "No courses found";
@@ -162,14 +171,37 @@ document.addEventListener("DOMContentLoaded", function() {
             coursesDropdown.innerHTML = '<option value="">Select a professor first</option>';
         }
     });
+
+ // Inside the coursesDropdown change event listener
+// Inside the coursesDropdown change event listener
+coursesDropdown.addEventListener("change", function () {
+    // Get the selected course
+    const selectedCourseIndex = coursesDropdown.selectedIndex;
+    const selectedCourseOption = coursesDropdown.options[selectedCourseIndex];
+    const selectedCourseCode = selectedCourseOption.dataset.courseCode; // Get course_code
+    const selectedCourseSection = selectedCourseOption.dataset.courseSection; // Get course_section
+
+    // Update the selected course code and section in localStorage
+    localStorage.setItem("selectedCourseCode", selectedCourseCode);
+    localStorage.setItem("selectedCourseSection", selectedCourseSection);
+
+    console.log("Selected Course Code:", selectedCourseCode);
+    console.log("Selected Course Section:", selectedCourseSection);
+
+    // Load cart items from local storage
+
+    // Update the "Checkout" button's href with the generated URL
+    updateCheckoutURL();
 });
-</script>
 
 
-                                
-			 					
-                                 <a class="btn btn-primary" id="checkoutBtn" href="authentication.html">Checkout</a>
+});
 
+
+        </script>
+
+        <a class="btn btn-primary" id="checkoutBtn" href="insert_transact.php?studentName=<?php echo isset($_SESSION['name']) ? $_SESSION['name'] : ''; ?>&studentID=<?php echo isset($_SESSION['studentID']) ? $_SESSION['studentID'] : ''; ?>&Course_Code=<?php echo isset($_SESSION['Course_Code']) ? $_SESSION['Course_Code'] : ''; ?>&selectedItems=<?php echo isset($_SESSION['selectedItems']) ? json_encode($_SESSION['selectedItems']) : '[]'; ?>">Checkout</a>
+    </div>
                                 </div>
                             </div>
                         </div>
@@ -240,6 +272,56 @@ document.addEventListener("DOMContentLoaded", function() {
         alert("Item with ID " + itemId + " removed from cart!");
     });
 });
+
+// Create a function to generate the checkout URL
+$(document).ready(function () {
+    // Load cart items from local storage
+    var cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    console.log("Cart Items:", cartItems);
+
+    // Display cart items
+    for (var i = 0; i < cartItems.length; i++) {
+        // ... (your existing code)
+    }
+    
+    // Update the "Checkout" button's href with the generated URL
+    $("#checkoutBtn").attr("href", generateCheckoutURL(cartItems));
+    
+
+    
+});
+
+// Create a function to generate the checkout URL
+// Inside the document ready function
+updateCheckoutURL();
+
+// Create a function to update the "Checkout" button's href
+function updateCheckoutURL() {
+    const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    const studentName = encodeURIComponent(localStorage.getItem('name'));
+    const studentID = localStorage.getItem('studentID');
+    const selectedCourseCode = localStorage.getItem('selectedCourseCode');
+    const selectedCourseSection = localStorage.getItem('selectedCourseSection');
+
+    // Ensure these values are not empty
+    if (!studentName || !studentID || !selectedCourseCode || !selectedCourseSection) {
+        console.error("Required data missing.");
+        return; // Handle this error as needed
+    }
+
+    const baseURL = "PHP/insert_transac.php";
+    const selectedItems = JSON.stringify(cartItems);
+
+    // Generate the URL with query parameters
+    const checkoutURL = `${baseURL}?studentName=${studentName}&studentID=${studentID}&Course_Code=${selectedCourseCode}&Course_Section=${selectedCourseSection}&selectedItems=${selectedItems}`;
+
+    console.log("Generated URL:", checkoutURL);
+
+    // Update the "Checkout" button's href
+    $("#checkoutBtn").attr("href", checkoutURL);
+}
+
+
 
     </script>
 	    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js" integrity="sha512-tO1jOwNW3AZe8bDWZI8cZQGJZyZGfTyg5fZvUm/VF5ir6noFQa0CCdpMrgMWBbez8aLdEf+m6eU7Hs2AJJLBwQ==" crossorigin="anonymous"></script>

@@ -215,58 +215,7 @@ session_start();
                 <div class="data-container">
                     <table>
                         <thead>
-                            <tr>
-                                <th>Campus</th>
-                                <th>Date Borrowed</th>
-                                <th>Due Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Arlegui</td>
-                                <td>2023-05-01</td>
-                                <td>2023-05-15</td>
-                            </tr>
-                            <tr>
-                                <td>Arlegui</td>
-                                <td>2023-04-15</td>
-                                <td>2023-05-01</td>
-                            </tr>
-                            <tr>
-                                <td>Arlegui</td>
-                                <td>2023-04-01</td>
-                                <td>2023-04-15</td>
-                            </tr>
-                            <tr>
-                                <td>Arlegui</td>
-                                <td>2023-03-15</td>
-                                <td>2023-04-01</td>
-                            </tr>
-                            <tr>
-                                <td>Arlegui</td>
-                                <td>2023-03-01</td>
-                                <td>2023-03-15</td>
-                            </tr>
-                            <tr>
-                                <td>Arlegui</td>
-                                <td>2023-02-15</td>
-                                <td>2023-03-01</td>
-                            </tr>
-                            <tr>
-                                <td>Arlegui</td>
-                                <td>2023-02-01</td>
-                                <td>2023-02-15</td>
-                            </tr>
-                            <tr>
-                                <td>Arlegui</td>
-                                <td>2023-01-15</td>
-                                <td>2023-02-01</td>
-                            </tr>
-                            <tr>
-                                <td>Arlegui</td>
-                                <td>2023-01-01</td>
-                                <td>2023-01-15</td>
-                            </tr>
+                           
                         </tbody>
                     </table>
                 </div>
@@ -285,37 +234,7 @@ session_start();
                     <table>
                         <thead>
                             <tr>
-                                <th>Campus</th>
-                                <th>Date Borrowed</th>
-                                <th>Due Date</th>
-                            </tr>
-                        </thead>
-                        <tbody id="statusTableBody">
-                            <tr>
-                                <td>Arlegui</td>
-                                <td>2023-05-01</td>
-                                <td>2023-05-15</td>
-                            </tr>
-                            <tr>
-                                <td>Arlegui</td>
-                                <td>2023-04-15</td>
-                                <td>2023-05-01</td>
-                            </tr>
-                            <tr>
-                                <td>Arlegui</td>
-                                <td>2023-04-01</td>
-                                <td>2023-04-15</td>
-                            </tr>
-                            <tr>
-                                <td>Arlegui</td>
-                                <td>2023-03-15</td>
-                                <td>2023-04-01</td>
-                            </tr>
-                            <tr>
-                                <td>Arlegui</td>
-                                <td>2023-03-01</td>
-                                <td>2023-03-15</td>
-                            </tr>
+                                
                         </tbody>
                     </table>
                 </div>
@@ -365,7 +284,11 @@ session_start();
     if (programElement) {
         programElement.textContent = program;
     }
+    localStorage.setItem('name', userName); // Replace 'The student name' with the actual student's name
+
 });
+
+
 
     </script>
     
