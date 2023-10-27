@@ -1,15 +1,9 @@
 <?php
 session_start();
 
-// Check if the user is already logged in (session is active)
-if (isset($_SESSION['facultyID'])) {
-    header("Location: /TIPTOOLROOmmalapitnadone/Professorpanel/prof.html"); // Redirect to the user's account page
-    exit();
-}
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
-    $facultyID = $_POST['id_num']; // Faculty ID
+    $studentID = $_POST['id_num']; // Student ID
     $enteredPassword = $_POST['password'];
 
     // Validate if the entered email is a valid Gmail address
@@ -31,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Prepare and execute the SQL query
-        $sql = "SELECT id_num, password FROM professors WHERE email = ?";
+        $sql = "SELECT id_num, password, first_name, last_name FROM professors WHERE email = ?";
         $stmt = $conn->prepare($sql);
 
         // Check if the query was prepared successfully
@@ -49,35 +43,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     // Verify the entered password against the hashed password
                     if (password_verify($enteredPassword, $hashedPassword)) {
-                        $_SESSION['facultyID'] = $row['id_num']; // Store faculty ID in the session
-                        header("Location: /TIPTOOLROOmmalapitnadone/Professorpanel/prof.html"); // Redirect to the user's account page
+                        // Store user's details in the session
+                        $_SESSION['facultyID'] = $row['id_num'];
+                        $_SESSION['name'] = $row['first_name'] . ' ' . $row['last_name'];
+                       
+                    
+                        // Redirect to myaccount.php
+                        header("Location: /TIPTOOLROOmmalapitnadone/Professorpanel/prof.php");
                         exit();
                     } else {
-                        // Invalid password; show a pop-up error message and redirect back
-                        echo "<script>alert('Invalid password'); window.history.back();</script>";
+                        // Invalid password; send an error response
+                        echo json_encode(array("success" => false, "message" => "Invalid password"));
                     }
                 } else {
-                    // User not found; show a pop-up error message and redirect back
-                    echo "<script>alert('User not found'); window.history.back();</script>";
+                    // User not found; send an error response
+                    echo json_encode(array("success" => false, "message" => "User not found"));
                 }
             } else {
                 // Error executing the SQL query
-                echo "Error executing the query: " . $stmt->error;
+                echo json_encode(array("success" => false, "message" => "Error executing the query: " . $stmt->error));
             }
 
             // Close the prepared statement
             $stmt->close();
         } else {
             // Error preparing the SQL query
-            echo "Error preparing the query: " . $conn->error;
+            echo json_encode(array("success" => false, "message" => "Error preparing the query: " . $conn->error));
         }
 
         // Close the database connection
         $conn->close();
     } else {
-        // Invalid email address; show a pop-up error message and redirect back
-        echo "<script>alert('Invalid email address. Please use a valid TIP Gmail address.'); window.history.back();</script>";
+        // Invalid email address; send an error response
+        echo json_encode(array("success" => false, "message" => "Invalid email address. Please use a valid TIP Gmail address."));
     }
 }
+
 ?>
-    

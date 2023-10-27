@@ -57,6 +57,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bind_param("ssssss", $_SESSION['facultyID'], $first_name, $last_name, $_SESSION['program'], $_SESSION['email'], $hashedPassword); // Use hashed password
 
     if ($stmt->execute()) {
+        $_SESSION['facultyName'] = $_SESSION['name'];
+
         echo "New record created successfully";
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
