@@ -35,6 +35,9 @@ session_start();
             return;
         }
 
+        // Create an object to store transactions grouped by student name and course
+        const transactionsByStudentAndCourse = {};
+
         // Make an AJAX request to get the professor's transactions
         $.ajax({
             url: '/TIPTOOLROOmmalapitnadone/student/PHP/get_transact.php',
@@ -53,11 +56,39 @@ session_start();
                 } else if (data.transactions.length === 0) {
                     transactionsList.html('<li>No transactions found.</li>');
                 } else {
-                    const transactionHTML = data.transactions.map(function (transaction) {
-                        return `<li>Student: ${transaction.studentname} - Course: ${transaction.courses} - Date: ${transaction.sdate} - Item: ${transaction.item} - Quantity: ${transaction.quantity} 
-                        <button class="confirmButton" data-transaction-id="${transaction.ID}">Confirm</button>
-                        <button class="rejectButton" data-transaction-id="${transaction.id}">Reject</button></li>`;
-                    }).join('');
+                    // Group transactions by student name and course
+                    data.transactions.forEach(function (transaction) {
+                        const key = `${transaction.studentname}-${transaction.courses}`;
+                        if (!transactionsByStudentAndCourse[key]) {
+                            transactionsByStudentAndCourse[key] = {
+                                studentName: transaction.studentname,
+                                course: transaction.courses,
+                                transactions: [],
+                            };
+                        }
+                        transactionsByStudentAndCourse[key].transactions.push(transaction);
+                    });
+
+                    // Render the grouped transactions with confirm and reject all buttons for each student
+                    const transactionHTML = Object.values(transactionsByStudentAndCourse).map(function (studentCourseGroup) {
+    const studentName = studentCourseGroup.studentName;
+    const course = studentCourseGroup.course;
+    const itemsHTML = studentCourseGroup.transactions.map(function (transaction) {
+        return `Item: ${transaction.item} - Quantity: ${transaction.quantity}`;
+    }).join('<br>');
+
+    // Display the date on the same line
+    const date = new Date(studentCourseGroup.transactions[0].sdate);
+    const formattedDate = date.toLocaleDateString();
+    
+    // Add confirm and reject all buttons for each student
+    const confirmButton = `<button class="confirmAllButton" data-student-name="${studentName}" data-course="${course}">Confirm All</button>`;
+    const rejectAllButton = `<button class="rejectAllButton" data-student-name="${studentName}" data-course="${course}">Reject All</button>`;
+
+    return `
+        <li>Student: ${studentName} - Course: ${course} - Date: ${formattedDate}<br>${itemsHTML}<br>${confirmButton}<br>${rejectAllButton}</li>
+    `;
+}).join('');
 
                     transactionsList.html(transactionHTML);
                 }
@@ -67,50 +98,68 @@ session_start();
             }
         });
 
-        // Handle confirm button click
-        $(document).on('click', '.confirmButton', function () {
-    const transactionId = $(this).data('transaction-id');
+        // Handle confirm all button click
+        $(document).on('click', '.confirmAllButton', function () {
+            const studentName = $(this).data('student-name');
+            const course = $(this).data('course');
 
-    // Ensure that transactionId is set correctly
-    if (transactionId !== undefined && transactionId !== "") {
-        $.ajax({
-            url: '/TIPTOOLROOmmalapitnadone/student/PHP/confirm_transact.php',
-            method: 'POST',
-            data: {
-                transactionId: transactionId,  // Make sure transactionId is set
-                professorId: '<?php echo $_SESSION['facultyID']; ?>'
-            },
-            success: function (response) {
-                // Handle the response from the server
-            }
+            // Get all transactions for the student and course
+            const transactionsToConfirm = transactionsByStudentAndCourse[`${studentName}-${course}`].transactions;
+
+            // Confirm all transactions for the student and course
+            confirmTransactions(transactionsToConfirm, studentName, course);
         });
-    } else {
-        console.log('transactionId is undefined or empty. Check your HTML data attributes.');
-    }
-});
 
-
-        // Handle reject button click
-        $(document).on('click', '.rejectButton', function () {
-            const transactionId = $(this).data('transaction-id');
+        // Function to confirm transactions
+        function confirmTransactions(transactionsToConfirm, studentName, course) {
+            // Send AJAX request to confirm transactions
+            const transactionIds = transactionsToConfirm.map(transaction => transaction.ID);
 
             $.ajax({
-                url: '/path/to/your/reject_script.php',
+                url: '/TIPTOOLROOmmalapitnadone/student/PHP/confirm_transact.php',
                 method: 'POST',
                 data: {
-                    transactionId: transactionId,
-                    professorId: '<?php echo $_SESSION['facultyID']; ?>'
+                    transactionIds: transactionIds,
+                    professorId: professorID,
+                    professorName: '<?php echo $_SESSION['facultyName']; ?>', // Include professor's name
                 },
                 success: function (response) {
-       // Handle the response from the server
-       console.log(response); // Log the response for debugging
-       // You can update the UI or display a success message here
-   }
-
+                    // Handle the response from the server
+                }
             });
+        }
+
+        // Handle reject all button click
+        $(document).on('click', '.rejectAllButton', function () {
+            const studentName = $(this).data('student-name');
+            const course = $(this).data('course');
+
+            // Get all transactions for the student and course
+            const transactionsToReject = transactionsByStudentAndCourse[`${studentName}-${course}`].transactions;
+
+            // Reject all transactions for the student and course
+            rejectAllTransactions(transactionsToReject, studentName, course);
         });
+
+        // Function to reject all transactions for a student and course
+        function rejectAllTransactions(transactionsToReject, studentName, course) {
+            // Send AJAX request to reject all transactions
+            const transactionIds = transactionsToReject.map(transaction => transaction.ID);
+
+            $.ajax({
+                url: '/path/to/your/reject_all_script.php',
+                method: 'POST',
+                data: {
+                    transactionIds: transactionIds,
+                    professorId: professorID,
+                    professorName: '<?php echo $_SESSION['facultyName']; ?>', // Include professor's name
+                },
+                success: function (response) {
+                    // Handle the response from the server
+                }
+            });
+        }
     });
-    
 
     function redirectToCoursesPage() {
         // Redirect to the "courses.html" page

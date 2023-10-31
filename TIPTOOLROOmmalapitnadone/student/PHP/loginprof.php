@@ -43,9 +43,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     // Verify the entered password against the hashed password
                     if (password_verify($enteredPassword, $hashedPassword)) {
-                        // Store user's details in the session
+                        // Store user's details in the sessionss
                         $_SESSION['facultyID'] = $row['id_num'];
-                        $_SESSION['name'] = $row['first_name'] . ' ' . $row['last_name'];
+                        $_SESSION['facultyName'] = $row['first_name'] . ' ' . $row['last_name'];
                        
                     
                         // Redirect to myaccount.php

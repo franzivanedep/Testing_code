@@ -1,11 +1,12 @@
 <?php
-// First database connection for transaction data
+// First, ensure you have a database connection established.
+// Replace these variables with your actual database connection details.
 $transactionServername = "localhost:3307";
 $transactionUsername = "root";
 $transactionPassword = ""; // Replace with your actual MySQL password for the transaction_db
 $transactionDbname = "transaction_db";
 
-// Create the database connection for transaction data
+// Create a database connection for transaction data
 $transactionConn = new mysqli($transactionServername, $transactionUsername, $transactionPassword, $transactionDbname);
 
 // Check the connection
@@ -14,7 +15,7 @@ if ($transactionConn->connect_error) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $transactionId = $_POST['transactionId'];
+    $transactionIds = $_POST['transactionIds'];
     $professorId = $_POST['professorId'];
 
     // Get the professor's first_name and last_name from the professor database
@@ -33,22 +34,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bind_result($professorFirstName, $professorLastName);
         $stmt->fetch();
 
-        // Update the transaction in the transaction database
+        // Update all the transactions in the transaction database and set status to '1'
+        $transactionIds = implode(',', $transactionIds);
         $sql = "UPDATE transaction_db.transactionstable
-                SET status = 'confirm',
+                SET status = '1',
                 confirmed_by = CONCAT('$professorFirstName', ' ', '$professorLastName')
-                WHERE ID = ?";
+                WHERE ID IN ($transactionIds)";
         $stmt = $transactionConn->prepare($sql);
 
         if ($stmt === false) {
             die("Error preparing statement: " . $transactionConn->error);
         }
 
-        $stmt->bind_param("i", $transactionId);
         $stmt->execute();
 
         if ($stmt->affected_rows === 0) {
-            die("No rows were updated. Transaction may not exist.");
+            die("No rows were updated. Transactions may not exist.");
         }
 
         $stmt->close();
@@ -56,6 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die("No professor found with the provided professorId.");
     }
 }
+
 
 // Close the database connection
 $transactionConn->close();
