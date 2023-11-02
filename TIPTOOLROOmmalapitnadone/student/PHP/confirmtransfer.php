@@ -10,7 +10,7 @@ if ($transactionConn->connect_error) {
     die("Connection to the transaction database failed: " . $transactionConn->connect_error);
 }
 
-$sql = "SELECT studentname, courses, sdate, item, confirmed_by, quantity FROM transaction_db.transactionstable WHERE status = '1'";
+$sql = "SELECT studentname, studentID, courses, sdate, item, confirmed_by, quantity FROM transaction_db.transactionstable WHERE status = '1'";
 $result = $transactionConn->query($sql);
 
 if ($result) {
@@ -23,6 +23,7 @@ if ($result) {
             if (!isset($transactionsGrouped[$key])) {
                 $transactionsGrouped[$key] = [
                     "studentname" => $row["studentname"],
+                    "studentID" => $row["studentID"], // Added studentID
                     "courses" => $row["courses"],
                     "sdate" => $row["sdate"],
                     "transactions" => [],
@@ -40,6 +41,8 @@ if ($result) {
 
         foreach ($transactionsGrouped as $transaction) {
             $html .= "<h2>Name: " . $transaction["studentname"] . "</h2>";
+            $html .= "<p>Student ID: " . $transaction["studentID"] . "</p>"; // Display studentID
+
             $html .= "<p>Course: " . $transaction["courses"] . "</p>";
             $html .= "<p>Date: " . $transaction["sdate"] . "</p>";
             $html .= "<p>Confirmed By: " . $transaction["confirmed_by"] . "</p>";
@@ -50,6 +53,10 @@ if ($result) {
             }
 
             $html .= "</ul>";
+
+            // Add Confirm and Reject buttons for each transaction
+            $html .= "<button class='confirm-button' data-student='" . $transaction["studentname"] . "' data-course='" . $transaction["courses"] . "' data-sdate='" . $transaction["sdate"] . "' data-student-id='" . $transaction["studentID"] . "'>Approve</button>";
+            $html .= "<button class='reject-button' data-student='" . $transaction["studentname"] . "' data-course='" . $transaction["courses"] . "' data-sdate='" . $transaction["sdate"] . "' data-student-id='" . $transaction["studentID"] . "'>Reject</button>";
         }
 
         echo $html;
@@ -61,6 +68,37 @@ if ($result) {
 } else {
     echo "Error retrieving confirmed transactions: " . $transactionConn->error;
 }
-
 $transactionConn->close();
 ?>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Include jQuery library -->
+<script>
+    $(document).ready(function () {
+        $(".confirm-button").click(function () {
+            var studentName = $(this).data("student");
+            var studentID = $(this).data("student-id"); // Added studentID
+            var courses = $(this).data("course");
+            var sdate = $(this).data("sdate");
+
+            // Send an AJAX request to update the status
+            $.ajax({
+                type: "POST",
+                url: "/TIPTOOLROOmmalapitnadone/student/PHP/approve.php", // Create this file to handle the update
+                data: {
+                    student: studentName,
+                    studentID: studentID, // Include studentID
+                    course: courses,
+                    date: sdate,
+                    status: 2, // Set the status to 2 for "Approved"
+                },
+                success: function (response) {
+                    if (response === "success") {
+                        alert("Transaction approved successfully!");
+                        location.reload(); // Reload the page to update the displayed data
+                    } else {
+                        alert("Failed to approve transaction. Please try again.");
+                    }
+                },
+            });
+        });
+    });
+</script>

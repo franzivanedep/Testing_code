@@ -241,7 +241,7 @@ select#category option {
       <ul>
         <li><a href="#"><i class="fas fa-chart-line"></i> Dashboard</a></li>
         <li><a href="#"><i class="fas fa-toolbox"></i> Items</a></li>
-        <li><a href="request.html"><i class="fas fa-clipboard-list"></i> Request</a></li>
+        <li><a href="admin_transac.php"><i class="fas fa-clipboard-list"></i> Request</a></li>
         <li><a href="#"><i class="fas fa-users"></i> Students</a></li>
         <li><a href="#"><i class="fas fa-chart-bar"></i> Reports</a></li>
       </ul>

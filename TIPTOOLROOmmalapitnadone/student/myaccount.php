@@ -1,6 +1,48 @@
 <?php
-session_start();
+session_start(); // Start the session
+
+// Check if the user is logged in
+if (isset($_SESSION['name']) && isset($_SESSION['studentID'])) {
+    $studentID = $_SESSION['studentID'];
+
+    // Create a new mysqli connection to your database
+    $mysqli = new mysqli("localhost", "root", "", "transaction_db", 3307);
+
+    // Check the connection
+    if ($mysqli->connect_error) {
+        die("Connection to the database failed: " . $mysqli->connect_error);
+    }
+
+    // Prepare and execute a query to get the status
+    $query = "SELECT status FROM transactionstable WHERE studentID = ?";
+    $stmt = $mysqli->prepare($query);
+    $stmt->bind_param("s", $studentID);
+    $stmt->execute();
+    $stmt->bind_result($status);
+
+    // Fetch the status
+    if ($stmt->fetch()) {
+        if ($status == 2) {
+            $statusMessage = "Your item is approved.";
+        } else {
+            $statusMessage = "Your item is pending or not approved.";
+        }
+    } else {
+        // Debugging output
+        $statusMessage = "Status not found for studentID: $studentID";
+
+        // Add more debugging output
+        echo "Error: " . $mysqli->error;
+    }
+
+    $stmt->close();
+    $mysqli->close();
+} else {
+    // Handle the case when the user is not logged in
+}
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -229,13 +271,20 @@ session_start();
             <!-- ... Your previous code ... -->
 
             <div class="block1">
-                <div class="borrow_status">Borrowing Status</div>
-                <div class="data-container">
-                    <table>
-                        <thead>
-                            <tr>
-                                
-                        </tbody>
+            <div class="borrow_status">Borrowing Status</div>
+        <div class="data-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><?php echo $statusMessage; ?></td>
+                    </tr>
+                </tbody>
+            </table>
                     </table>
                 </div>
             </div>
