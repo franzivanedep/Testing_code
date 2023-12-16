@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $servername = "localhost:3307";
         $username = "root";
         $db_password = "your_password"; // Replace with your actual MySQL password
-        $dbname = "professor_db";
+        $dbname = "tiptoolroom_db";
 
         // Create a new mysqli connection
         $conn = new mysqli($servername, $username, $db_password, $dbname);

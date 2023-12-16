@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $servername = "localhost:3307";
         $username = "root";
         $db_password = "your_password"; // Replace with your actual MySQL password
-        $dbname = "student_db";
+        $dbname = "tiptoolroom_db";
 
         // Create a new mysqli connection
         $conn = new mysqli($servername, $username, $db_password, $dbname);
@@ -25,13 +25,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Prepare and execute the SQL query
-        $sql = "SELECT id_num, password, first_name, last_name, program FROM student WHERE email = ?";
+        $sql = "SELECT id_num, password, first_name, last_name, program FROM student WHERE email = ? AND id_num = ?";
         $stmt = $conn->prepare($sql);
 
         // Check if the query was prepared successfully
         if ($stmt) {
             // Binding parameters
-            $stmt->bind_param("s", $email);
+            $stmt->bind_param("ss", $email, $studentID);
 
             // Execute the prepared statement
             if ($stmt->execute()) {
@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $_SESSION['email'] = $email;
                     
                         // Redirect to myaccount.php
-                        header("Location: \TIPTOOLROOmmalapitnadone\student\myaccount.php");
+                        header("Location: /TIPTOOLROOmmalapitnadone/student/myaccount.php");
                         exit();
                     } else {
                         // Invalid password; send an error response
@@ -79,5 +79,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo json_encode(array("success" => false, "message" => "Invalid email address. Please use a valid TIP Gmail address."));
     }
 }
-
 ?>

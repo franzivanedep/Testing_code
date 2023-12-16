@@ -2,7 +2,7 @@
 $servername = "localhost:3307";
 $username = "root";
 $password = "your_password"; // Replace with your actual MySQL password
-$dbname = "item_db";
+$dbname = "tiptoolroom_db";
 
 // Create a database connection
 $conn = new mysqli($servername, $username, $password, $dbname);

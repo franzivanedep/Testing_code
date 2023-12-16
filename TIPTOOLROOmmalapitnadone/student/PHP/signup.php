@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $servername = "localhost:3307";
     $username = "root";
     $db_password = "your_password"; // Replace with your actual MySQL password
-    $dbname = "student_db";
+    $dbname = "tiptoolroom_db";
  
     $conn = new mysqli($servername, $username, $db_password, $dbname);
 
@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->close();
     $conn->close();
 
-    header("Location: \TIPTOOLROOmmalapitnadone\student\myaccount.php?name=" . urlencode("$fname $lname") . "&id=" . urlencode($_SESSION['studentID']) . "&program=" . urlencode($_SESSION['program']));
+    header("Location: \TIPTOOLROOmmalapitnadone\student\login.html?name=" . urlencode("$fname $lname") . "&id=" . urlencode($_SESSION['studentID']) . "&program=" . urlencode($_SESSION['program']));
 
     exit();
 }

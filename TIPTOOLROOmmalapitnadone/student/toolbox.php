@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+    
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -39,7 +40,21 @@
                             </ul>
                         </li>
                     </ul>
-
+                    <?php
+                  session_start(); // Start the session
+                  
+                  //==========================================
+                  
+                  if (!isset($_SESSION['studentID'])) {
+                      // Redirect to login.html
+                      header("Location: login.html");
+                      exit();
+                  }
+                  
+                
+                
+                
+                ?>
                     <!-- Checkout -->
                     <form class="d-flex" action="toolbox.html" method="get">
                         <button class="btn btn-outline-dark" type="submit">
@@ -86,11 +101,15 @@
 			 					<div class="form-group">
     <label for="Professors">Professors:</label>
             <select class="form-control" id="professors">
-                <?php
+            <?php
+                  session_start(); // Start the session
+                  
+                
+                  
                 $servername = "localhost:3307";
                 $username = "root";
                 $db_password = ""; // Replace with your actual MySQL password
-                $dbname = "professor_db";
+                $dbname = "tiptoolroom_db";
 
                 $conn = new mysqli($servername, $username, $db_password, $dbname);
 
@@ -111,7 +130,9 @@
                     echo "No professors found";
                 }
                 $conn->close();
+
                 ?>
+              
             </select>
         </div>
         <div class="form-group">
@@ -232,7 +253,7 @@ coursesDropdown.addEventListener("change", function () {
             '<div> <div style="display: flex; justify-content: space-between;"> <div style="font-weight:bold; font-size:x-large;">Item</div> <div style="position:relative; right:100px; font-weight:bold; font-size:x-large; ">Quantity</div> </div> </div>'+
             '<div class="d-flex justify-content-between">' +
             '<div class="cart-item-image-container">' +
-            '<img class="cart-item-image" src="' + item.image + '" alt="..." />' +
+            '<img class="cart-item-image" src="' + item.images + '" alt="..." />' +
             '</div>' +
             '<div class="flex-grow-1" style="margin:auto;" >' +
             '<h5 style="margin-left:10px;" class="cart-item-title">' + item.name + '</h5>' +

@@ -1,12 +1,22 @@
 <?php
 session_start(); // Start the session
 
+//==========================================
+
+if (!isset($_SESSION['studentID'])) {
+    // Redirect to login.html
+    header("Location: login.html");
+    exit();
+}
+
+//+++++++++++++++++++++++++++++++++++++++==
+
 // Check if the user is logged in
 if (isset($_SESSION['name']) && isset($_SESSION['studentID'])) {
     $studentID = $_SESSION['studentID'];
 
     // Create a new mysqli connection to your database
-    $mysqli = new mysqli("localhost", "root", "", "transaction_db", 3307);
+    $mysqli = new mysqli("localhost", "root", "", "tiptoolroom_db", 3307);
 
     // Check the connection
     if ($mysqli->connect_error) {
@@ -24,6 +34,8 @@ if (isset($_SESSION['name']) && isset($_SESSION['studentID'])) {
     if ($stmt->fetch()) {
         if ($status == 2) {
             $statusMessage = "Your item is approved.";
+        } elseif ($status == 1) {
+            $statusMessage = "Your request has been confirmed by your professor.";
         } else {
             $statusMessage = "Your item is pending or not approved.";
         }
@@ -41,6 +53,7 @@ if (isset($_SESSION['name']) && isset($_SESSION['studentID'])) {
     // Handle the case when the user is not logged in
 }
 ?>
+
 
 
 <!DOCTYPE html>

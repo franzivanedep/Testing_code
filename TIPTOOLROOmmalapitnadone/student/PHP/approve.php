@@ -2,7 +2,7 @@
 $transactionServername = "localhost:3307";
 $transactionUsername = "root";
 $transactionPassword = ""; // Replace with your actual MySQL password for the transaction_db
-$transactionDbname = "transaction_db";
+$transactionDbname = "tiptoolroom_db";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $studentName = $_POST["student"];
@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     // Update the status in the database
-    $updateSql = "UPDATE transaction_db.transactionstable SET status = ? WHERE studentname = ? AND courses = ? AND sdate = ?";
+    $updateSql = "UPDATE tiptoolroom_db.transactionstable SET status = ? WHERE studentname = ? AND courses = ? AND sdate = ?";
     $stmt = $updateConn->prepare($updateSql);
     $stmt->bind_param("isss", $newStatus, $studentName, $courses, $sdate);
 

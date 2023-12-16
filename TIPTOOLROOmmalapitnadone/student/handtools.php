@@ -61,10 +61,21 @@
     </header>
 
     <?php
+     
+      session_start(); // Start the session
+      
+      //==========================================
+      
+      if (!isset($_SESSION['studentID'])) {
+          // Redirect to login.html
+          header("Location: login.html");
+          exit();
+      }
+      
 $servername = "localhost:3307";
 $username = "root";
 $db_password = "your_password"; // Replace with your actual MySQL password
-$dbname = "item_db";
+$dbname = "tiptoolroom_db";
 
 // Create a database connection
 $conn = new mysqli($servername, $username, $db_password, $dbname);

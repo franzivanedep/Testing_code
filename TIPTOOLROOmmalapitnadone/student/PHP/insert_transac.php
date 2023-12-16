@@ -14,7 +14,7 @@ if (!$studentName || !$studentID || !$courseCode || !$courseSection || !$selecte
 $servername = "localhost:3307";
 $username = "root";
 $db_password = "your_password"; // Replace with your actual MySQL password
-$dbname = "transaction_db";
+$dbname = "tiptoolroom_db";
 $conn = new mysqli($servername, $username, $db_password, $dbname);
 
 // Check if the connection to the database was successful

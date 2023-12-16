@@ -2,7 +2,7 @@
 $transactionServername = "localhost:3307";
 $transactionUsername = "root";
 $transactionPassword = ""; // Replace with your actual MySQL password for the transaction_db
-$transactionDbname = "transaction_db";
+$transactionDbname = "tiptoolroom_db";
 
 $transactionConn = new mysqli($transactionServername, $transactionUsername, $transactionPassword, $transactionDbname);
 
@@ -10,7 +10,7 @@ if ($transactionConn->connect_error) {
     die("Connection to the transaction database failed: " . $transactionConn->connect_error);
 }
 
-$sql = "SELECT studentname, studentID, courses, sdate, item, confirmed_by, quantity FROM transaction_db.transactionstable WHERE status = '1'";
+$sql = "SELECT studentname, studentID, courses, sdate, item, confirmed_by, quantity FROM tiptoolroom_db.transactionstable WHERE status = '1'";
 $result = $transactionConn->query($sql);
 
 if ($result) {

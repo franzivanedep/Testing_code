@@ -1,5 +1,7 @@
+
 <!DOCTYPE html>
 <html lang="en">
+    
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -67,11 +69,21 @@
         </div>
     </header>
     <?php
+    session_start(); // Start the session
+    
+    //==========================================
+    
+    if (!isset($_SESSION['studentID'])) {
+        // Redirect to login.html
+        header("Location: login.html");
+        exit();
+    }
+    
 // Database configuration
 $servername = "localhost:3307";
 $username = "root";
 $db_password = "your_password"; // Replace with your actual MySQL password
-$dbname = "item_db";
+$dbname = "tiptoolroom_db";
 
 // Create a database connection
 $conn = new mysqli($servername, $username, $db_password, $dbname);
@@ -92,7 +104,7 @@ if ($result->num_rows > 0) {
     // Render each item as needed in your HTML
     echo "<div class='col mb-5'>"; // Adjust margin between columns
     echo "<div class='card h-100'>";
-    echo "<img class='card-img-top product-image' src='https://via.placeholder.com/300' alt='Product Image' />";
+    echo "<img class='card-img-top product-image' src='./php/uploads/" . $row["images"] . "' alt='Product Image' style='width: 320px; height: 300px;' />";
     echo "<div class='card-body p-3'>";
     echo "<h5 class='card-title fw-bolder'>" . $row["name"] . "</h5>";
     echo "<button class='btn btn-outline-dark add-to-cart' data-item-id='" . $row["id_num"] . "'>Add to Toolbox</button>";

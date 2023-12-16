@@ -3,13 +3,13 @@
 $transactionServername = "localhost:3307";
 $transactionUsername = "root";
 $transactionPassword = ""; // Replace with your actual MySQL password for the transaction_db
-$transactionDbname = "transaction_db";
+$transactionDbname = "tiptoolroom_db";
 
 // Second database connection for professor data
 $professorServername = "localhost:3307";
 $professorUsername = "root";
-$professorPassword = ""; // Replace with your actual MySQL password for the professor_db
-$professorDbname = "professor_db";
+$professorPassword = ""; // Replace with your actual MySQL password for the tiptoolroom_db
+$professorDbname = "tiptoolroom_db";
 
 // Create the first database connection for transaction data
 $transactionConn = new mysqli($transactionServername, $transactionUsername, $transactionPassword, $transactionDbname);
@@ -26,8 +26,6 @@ $professorConn = new mysqli($professorServername, $professorUsername, $professor
 if ($professorConn->connect_error) {
     die("Connection to professor database failed: " . $professorConn->connect_error);
 }
-
-// ...
 
 // Assuming you have the professor's id (professor_id) available in a variable
 $professorId = $_GET['professor_id'];
@@ -55,8 +53,11 @@ if ($professorResult === false) {
 
             if ($transactionResult->num_rows > 0) {
                 while ($transactionRow = $transactionResult->fetch_assoc()) {
-                    // Add each transaction to the transactions array
-                    $transactions[] = $transactionRow;
+                    // Check if the transaction status is not 2 (admin)
+                    if ($transactionRow['status'] != 2) {
+                        // Add the transaction to the transactions array
+                        $transactions[] = $transactionRow;
+                    }
                 }
             }
 

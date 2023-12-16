@@ -61,10 +61,20 @@
         </div>
     </header>
     <?php
+      session_start(); // Start the session
+      
+      //==========================================
+      
+      if (!isset($_SESSION['studentID'])) {
+          // Redirect to login.html
+          header("Location: login.html");
+          exit();
+      }
+      
 $servername = "localhost:3307";
 $username = "root";
 $db_password = "your_password"; // Replace with your actual MySQL password
-$dbname = "item_db";
+$dbname = "tiptoolroom_db";
 
 // Create a database connection
 $conn = new mysqli($servername, $username, $db_password, $dbname);
@@ -86,7 +96,7 @@ if ($result->num_rows > 0) {
         // Render each item with the appropriate CSS class
         echo "<div class='col mb-4'>";
         echo "<div class='card h-100'>";
-        echo "<img class='card-img-top product-image' src='https://via.placeholder.com/300' alt='Product Image' />";
+        echo "<img class='card-img-top product-image' src='./php/uploads/" . $row["images"] . "' alt='Product Image' style='width: 450px; height: 300px;' />";
         echo "<div class='card-body p-3'>";
         echo "<h5 class='card-title fw-bolder'>" . $row["name"] . "</h5>";
         echo "<button class='btn btn-outline-dark add-to-cart' data-item-id='" . $row["id_num"] . "'>Add to Toolbox</button>";

@@ -271,7 +271,7 @@ select#category option {
               $servername = "localhost:3307";
               $username = "root";
               $db_password = ""; // Replace with your actual MySQL password
-              $dbname = "item_db";
+              $dbname = "tiptoolroom_db";
 
 
               // Create a database connection
