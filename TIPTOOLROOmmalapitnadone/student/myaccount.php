@@ -23,28 +23,30 @@ if (isset($_SESSION['name']) && isset($_SESSION['studentID'])) {
         die("Connection to the database failed: " . $mysqli->connect_error);
     }
 
-    // Prepare and execute a query to get the status
-    $query = "SELECT status FROM transactionstable WHERE studentID = ?";
+    // Prepare and execute a query to get the status and timestamp
+    $query = "SELECT status, stime FROM transactionstable WHERE studentID = ?";
     $stmt = $mysqli->prepare($query);
     $stmt->bind_param("s", $studentID);
     $stmt->execute();
-    $stmt->bind_result($status);
+    $stmt->bind_result($status, $timestamp);
 
-    // Fetch the status
-    if ($stmt->fetch()) {
+    // Fetch the status and timestamp
+    $statusMessages = [];
+
+    while ($stmt->fetch()) {
         if ($status == 2) {
-            $statusMessage = "Your item is approved.";
+            $statusMessages[] = ["message" => "Your item is Ready to pick up", "timestamp" => $timestamp];
         } elseif ($status == 1) {
-            $statusMessage = "Your request has been confirmed by your professor.";
+            $statusMessages[] = ["message" => "Your request has been confirmed by your professor.", "timestamp" => $timestamp];
+        } elseif ($status == 4) {
+            $statusMessages[] = ["message" => "Your item is preparing.", "timestamp" => $timestamp];
+        } elseif ($status == 3) {
+            $statusMessages[] = ["message" => "Your item request has been rejected.", "timestamp" => $timestamp];
+        } elseif ($status == 0) {
+            $statusMessages[] = ["message" => "Waiting for professor's approval.", "timestamp" => $timestamp];
         } else {
-            $statusMessage = "Your item is pending or not approved.";
+            $statusMessages[] = ["message" => "Unknown status: $status", "timestamp" => $timestamp]; // Add a default message for unknown status values
         }
-    } else {
-        // Debugging output
-        $statusMessage = "Status not found for studentID: $studentID";
-
-        // Add more debugging output
-        echo "Error: " . $mysqli->error;
     }
 
     $stmt->close();
@@ -52,9 +54,11 @@ if (isset($_SESSION['name']) && isset($_SESSION['studentID'])) {
 } else {
     // Handle the case when the user is not logged in
 }
+
+// Now you can use $statusMessages wherever you need it in your code.
+
+
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -294,7 +298,14 @@ if (isset($_SESSION['name']) && isset($_SESSION['studentID'])) {
                 </thead>
                 <tbody>
                     <tr>
-                        <td><?php echo $statusMessage; ?></td>
+                    <?php
+// Assuming you want to display each status message in a separate row of a table
+echo "<table>";
+foreach ($statusMessages as $message) {
+    echo "<tr><td>{$message['message']}</td><td>{$message['timestamp']}</td></tr>";
+}
+echo "</table>";
+?>
                     </tr>
                 </tbody>
             </table>

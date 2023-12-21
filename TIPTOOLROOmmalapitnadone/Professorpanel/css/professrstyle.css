@@ -1,76 +1,65 @@
-/* Reset some default styles */
-body, h1, h2, ul, li, p, button {
-    margin: 0;
-    padding: 0;
-}
-
 body {
+    background-color: black;
+    color: white;
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
 }
 
 header {
-    background-color: #007BFF;
-    color: #fff;
-    padding: 20px;
-    text-align: center;
+    background-color: #333;
+    padding: 10px;
 }
 
-h1 {
-    font-size: 24px;
-}
-
-h2 {
-    font-size: 20px;
+h1, h2 {
+    color: white;
 }
 
 button {
-    background-color: #007BFF;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+    padding: 5px 10px;
     cursor: pointer;
+    margin: 5px;
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: black;
+    color: white;
 }
 
 main {
     padding: 20px;
 }
 
-#transactions {
-    background-color: #fff;
-    padding: 20px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+section {
+    margin-top: 20px;
 }
 
-#transactions h2 {
-    font-size: 18px;
-    margin-bottom: 10px;
-}
-
-#transactionsList {
+ul {
     list-style: none;
+    padding: 0;
 }
 
-#transactionsList li {
-    font-size: 16px;
+li {
+    border: 1px solid #ccc;
     margin-bottom: 10px;
+    padding: 10px;
 }
 
-/* Responsive Design - Adjust as needed */
-@media (max-width: 768px) {
-    header {
-        padding: 10px;
-    }
+li:hover {
+    background-color: #444;
+}
 
-    h1 {
-        font-size: 20px;
-    }
+.confirmAllButton, .rejectAllButton {
+    background-color: black;
+    color: white;
+    border: 2px solid black;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin: 5px;
+}
 
-    h2 {
-        font-size: 18px;
-    }
+.confirmAllButton:hover, .rejectAllButton:hover {
+    background-color: white;
+    color: black;
 }

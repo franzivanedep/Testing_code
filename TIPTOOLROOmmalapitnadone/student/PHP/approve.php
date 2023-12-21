@@ -4,30 +4,48 @@ $transactionUsername = "root";
 $transactionPassword = ""; // Replace with your actual MySQL password for the transaction_db
 $transactionDbname = "tiptoolroom_db";
 
+// Check if it's a POST request
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $studentName = $_POST["student"];
-    $courses = $_POST["course"];
-    $sdate = $_POST["date"];
-    $newStatus = 2; // Set the status to 2 for "Approved"
+    // Check if required parameters are set
+    if (isset($_POST["student"], $_POST["course"], $_POST["date"], $_POST["status"], $_POST["time"])) {
+        $studentName = $_POST["student"];
+        $courses = $_POST["course"];
+        $sdate = $_POST["date"];
+        $newStatus = $_POST["status"];
+        $transactionTime = $_POST["time"];
 
-    $updateConn = new mysqli($transactionServername, $transactionUsername, $transactionPassword, $transactionDbname);
+        $updateConn = new mysqli($transactionServername, $transactionUsername, $transactionPassword, $transactionDbname);
 
-    if ($updateConn->connect_error) {
-        die("Connection to the database failed: " . $updateConn->connect_error);
-    }
+        // Check the connection
+        if ($updateConn->connect_error) {
+            echo json_encode(["status" => "error", "message" => "Connection to the database failed: " . $updateConn->connect_error]);
+            exit();
+        }
 
-    // Update the status in the database
-    $updateSql = "UPDATE tiptoolroom_db.transactionstable SET status = ? WHERE studentname = ? AND courses = ? AND sdate = ?";
-    $stmt = $updateConn->prepare($updateSql);
-    $stmt->bind_param("isss", $newStatus, $studentName, $courses, $sdate);
+        // Update the status in the database
+        $updateSql = "UPDATE tiptoolroom_db.transactionstable SET status = ? WHERE studentname = ? AND courses = ? AND sdate = ? AND stime = ?";
+        $stmt = $updateConn->prepare($updateSql);
 
-    if ($stmt->execute()) {
-        echo "success"; // Return a success message
+        if ($stmt) {
+            $stmt->bind_param("issss", $newStatus, $studentName, $courses, $sdate, $transactionTime);
+
+            // Execute the statement
+            if ($stmt->execute()) {
+                echo json_encode(["status" => "success"]);
+            } else {
+                echo json_encode(["status" => "error", "message" => "Error updating status: " . $stmt->error]);
+            }
+
+            $stmt->close();
+        } else {
+            echo json_encode(["status" => "error", "message" => "Error preparing statement."]);
+        }
+
+        $updateConn->close();
     } else {
-        echo "Error: " . $updateConn->error; // Return the specific error message
+        echo json_encode(["status" => "error", "message" => "Required parameters are missing."]);
     }
-
-    $stmt->close();
-    $updateConn->close();
+} else {
+    echo json_encode(["status" => "error", "message" => "Invalid request method. This script should be accessed via a POST request."]);
 }
 ?>

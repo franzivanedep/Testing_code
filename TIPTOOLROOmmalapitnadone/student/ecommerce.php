@@ -104,7 +104,7 @@ if ($result->num_rows > 0) {
     // Render each item as needed in your HTML
     echo "<div class='col mb-5'>"; // Adjust margin between columns
     echo "<div class='card h-100'>";
-    echo "<img class='card-img-top product-image' src='./php/uploads/" . $row["images"] . "' alt='Product Image' style='width: 320px; height: 300px;' />";
+    echo "<img class='card-img-top product-image' src='./php/uploads/" . $row["images"] . "' alt='Product Image' style='width: 420px; height: 320px;' />";
     echo "<div class='card-body p-3'>";
     echo "<h5 class='card-title fw-bolder'>" . $row["name"] . "</h5>";
     echo "<button class='btn btn-outline-dark add-to-cart' data-item-id='" . $row["id_num"] . "'>Add to Toolbox</button>";

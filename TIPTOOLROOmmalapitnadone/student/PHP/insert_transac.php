@@ -33,8 +33,11 @@ foreach ($selectedItems as $item) {
     $sdate = date("Y-m-d");
     $status = 0;
 
-    $sql = "INSERT INTO transactionstable (ID, TransactID, item, quantity, studentname, studentID, sdate, status, courses)
-            VALUES (NULL, '$transactID', '$itemName', '$itemQuantity', '$studentName', '$studentID', '$sdate', '$status', '$courses')";
+    // Get current timestamp
+    $currentTimestamp = date("Y-m-d H:i:s");
+
+    $sql = "INSERT INTO transactionstable (ID, TransactID, item, quantity, studentname, studentID, sdate, status, courses, stime)
+            VALUES (NULL, '$transactID', '$itemName', '$itemQuantity', '$studentName', '$studentID', '$sdate', '$status', '$courses', '$currentTimestamp')";
 
     if ($conn->query($sql) === TRUE) {
         // Insertion success, you can add further logic if needed
@@ -44,4 +47,6 @@ foreach ($selectedItems as $item) {
 }
 
 $conn->close();
+header("Location: \TIPTOOLROOmmalapitnadone\student\myaccount.php");
+exit();
 ?>

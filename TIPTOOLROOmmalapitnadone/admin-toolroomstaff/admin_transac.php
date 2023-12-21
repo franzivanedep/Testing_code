@@ -5,7 +5,6 @@
     <title>Student Request</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
 </head>
 <body>
     <!-- Sidebar -->
@@ -33,6 +32,11 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function () {
+            // Function to get username from local storage
+            function getUsername() {
+                return localStorage.getItem("username");
+            }
+
             // Disable buttons initially
             $('#confirmButton, #rejectButton').prop('disabled', true);
 
@@ -67,6 +71,10 @@
                     console.log('Error: ' + JSON.stringify(error));
                 }
             });
+
+            // Example: Retrieve and log the username from local storage
+            const storedUsername = getUsername();
+            console.log("Stored username:", storedUsername);
         });
     </script>
 </body>
